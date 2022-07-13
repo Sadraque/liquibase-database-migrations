@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/liquibase_database_migrations_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    url: jdbc:postgresql://localhost:5432/liquibase_database_migrations_db
+    user: postgres
+    password: postgres
+    change-log: classpath:db/liquibase.xml
+    default-schema: public
+    enabled: true

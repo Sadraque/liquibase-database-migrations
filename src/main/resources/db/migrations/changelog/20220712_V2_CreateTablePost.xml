@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="SadraqueNunes" id="20220712_V2_CREATE_TABLE_POST" runOnChange="false" >
+        <comment>Create table Post</comment>
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_post (
+                id          BIGINT       NOT NULL PRIMARY KEY,
+                title       VARCHAR(255) NOT NULL,
+                description VARCHAR(255) NOT NULL,
+                fk_user     BIGINT       NOT NULL
+                    CONSTRAINT fk_user
+                    REFERENCES t_user
+            );
+
+            CREATE INDEX IF NOT EXISTS i_t_post_id ON t_post(id);
+
+            CREATE SEQUENCE IF NOT EXISTS sq_post;
+        </sql>
+
+        <rollback>
+            DROP TABLE IF EXISTS t_post;
+
+            DROP INDEX IF EXISTS i_t_post_id;
+
+            DROP SEQUENCE IF EXISTS sq_post;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
